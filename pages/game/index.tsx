@@ -22,7 +22,6 @@ export default function Game() {
   }, [])
 
   const newQuiz = (data: Pokemon[]) => {
-    setCurrent(current + 1);
     let pokemonsRandom: Pokemon[] = [];
 
     const numbers = Array(100).fill(0).map((_, index) => index + 1);
@@ -34,7 +33,7 @@ export default function Game() {
 
     setPokemons(pokemonsRandom);
     let number = randomNumberInRange(0, 3);
-    setPokemonNumber(pokemonsList.indexOf(pokemonsRandom[number]));
+    setPokemonNumber(data.indexOf(pokemonsRandom[number]));
     setPokemon(pokemonsRandom[number]);
   }
 
@@ -45,19 +44,31 @@ export default function Game() {
   const chooseOption = (option: Pokemon) => {
     if (pokemonNumber == pokemonsList.indexOf(option)) {
       console.log('acertou');
+      newQuiz(pokemonsList);
+      setCurrent(current + 1);
+    } else {
+      console.log('errou')
+      setCurrent(0);
+      newQuiz(pokemonsList);
     }
   }
 
-
-  return (
-    <div className="wrapper">
-      <h2>Number is: {current}</h2>
-      <h2>Number is: {pokemon?.name}</h2>
-      <button onClick={() => newQuiz(pokemonsList)}>
-        Click Me Generate
-      </button>
-      <div>{pokemons.map((item) => <button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>)}</div>
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
-    </div>
-  )
+    return (
+      <div className="wrapper">
+        <h2>Number is: {pokemonNumber}</h2>
+        {pokemonNumber > 0 ? 
+          <div>
+            <h2>Number is: {current}</h2>
+            <h2>Number is: {pokemon?.name}</h2>
+            <button onClick={() => newQuiz(pokemonsList)}>
+              Click Me Generate
+            </button>
+            <div>{pokemons.map((item) => <button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>)}</div>
+            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
+          </div>
+          : <p>loading...</p>
+        }
+        
+      </div>
+    )
 }
