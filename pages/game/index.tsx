@@ -43,7 +43,9 @@ export default function Game() {
   };
 
   const chooseOption = (option: Pokemon) => {
-    
+    if (pokemonNumber == pokemonsList.indexOf(option)) {
+      console.log('acertou');
+    }
   }
 
 
@@ -54,8 +56,8 @@ export default function Game() {
       <button onClick={() => newQuiz(pokemonsList)}>
         Click Me Generate
       </button>
-      <div>{pokemons.map((item) => <button key={item.name}>{item.name}</button>)}</div>
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber}.svg`} alt="" />
+      <div>{pokemons.map((item) => <button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>)}</div>
+      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
     </div>
   )
 }
