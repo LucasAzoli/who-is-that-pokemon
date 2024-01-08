@@ -1,0 +1,12 @@
+.default {
+    background-color: #2D70B7;
+    border: 5px solid #1D2D5F;
+    border-radius: 15px;
+    padding: 13px;
+}
+
+.default button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

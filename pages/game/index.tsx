@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Data } from '../../types/data';
 import { Pokemon } from '../../types/pokemon';
+import Div from '../../components/div';
 
 export default function Game() {
   const [pokemon, setPokemon] = useState<Pokemon>();
@@ -43,11 +44,9 @@ export default function Game() {
 
   const chooseOption = (option: Pokemon) => {
     if (pokemonNumber == pokemonsList.indexOf(option)) {
-      console.log('acertou');
       newQuiz(pokemonsList);
       setCurrent(current + 1);
     } else {
-      console.log('errou')
       setCurrent(0);
       newQuiz(pokemonsList);
     }
@@ -55,15 +54,18 @@ export default function Game() {
 
     return (
       <div className="wrapper">
-        <h2>Number is: {pokemonNumber}</h2>
         {pokemonNumber > 0 ? 
           <div>
-            <h2>Number is: {current}</h2>
-            <h2>Number is: {pokemon?.name}</h2>
-            <button onClick={() => newQuiz(pokemonsList)}>
-              Click Me Generate
-            </button>
-            <div>{pokemons.map((item) => <button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>)}</div>
+            <Div ><h2>Number is: {current}</h2></Div>
+            <Div ><h2>Number is: {pokemon?.name}</h2></Div>
+            <Div >
+              <button onClick={() => newQuiz(pokemonsList)}>
+                Click Me Generate
+              </button>
+            </Div>
+            
+            
+            <div>{pokemons.map((item) => <Div key={item.name}><button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button></Div>)}</div>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
           </div>
           : <p>loading...</p>
