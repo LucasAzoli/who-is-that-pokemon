@@ -1,0 +1,40 @@
+.game {
+    max-width: 800px;
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.game .pokemonImage {
+    background-image: url(../../public/pokemonBackground.png);
+    padding: 70px;
+    display: flex;
+    align-items: center;
+    width: 800px;
+    height: 450px;
+    border-radius: 20px;
+}
+
+.game .image {
+    filter: grayscale(100%) brightness(0%) saturate(0%) contrast(100%);
+    -webkit-filter: grayscale(100%) brightness(0%) saturate(0%) contrast(100%);
+    -moz-filter: grayscale(100%) brightness(0%) saturate(0%) contrast(100%);
+}
+
+.game .quiz {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.game .answers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.game .answers div {
+    width: calc(50% - 10px);
+}
