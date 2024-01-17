@@ -2,19 +2,38 @@ import { useEffect, useState } from 'react';
 import { Data } from '../../types/data';
 import { Pokemon } from '../../types/pokemon';
 import Div from '../../components/div';
-import styles from './game.module.css'
+import styles from './game.module.css';
+import Image from 'next/image';
+import arrow from '../../public/arrowforward.svg';
+import Link from 'next/link';
 
 export default function Game() {
   const [pokemon, setPokemon] = useState<Pokemon>();
-  const [pokemonNumber, setPokemonNumber] = useState(0);
-  const [current, setCurrent] = useState(0);
+  const [pokemonNumber, setPokemonNumber] = useState<number>(0);
+  const [current, setCurrent] = useState<number>(0);
+  const [record, setRecord] = useState<number>(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [pokemonsList, setPokemonsList] = useState<Pokemon[]>([]);
+  const [filter, setFilter] = useState<boolean>(true);
+
+  const [option, setOption] = useState<Pokemon>();
+
+  const [endRound, setEndRound] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(true);
 
 
   useEffect(() => {
+    const r = localStorage.getItem('record');
+    if (r != null) {
+      if (parseInt(r) > 0) {
+        setRecord(parseInt(r));
+      } else {
+        localStorage.setItem('record', '0');
+      }
+      
+    }
+
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then((response) => 
       response.json()
@@ -49,37 +68,53 @@ export default function Game() {
   };
 
   const chooseOption = (option: Pokemon) => {
+    setOption(option);
+    setFilter(false);
+    setEndRound(true);
     if (pokemonNumber == pokemonsList.indexOf(option)) {
-      newQuiz(pokemonsList);
+      if (current + 1 > record) {
+        setRecord(current + 1);
+        localStorage.setItem("record", (current+1).toString());
+      }
       setCurrent(current + 1);
     } else {
-      setCurrent(0);
-      newQuiz(pokemonsList);
+      setCurrent(0); 
     }
+    setTimeout(() => {
+      setFilter(true);
+      newQuiz(pokemonsList);
+      setEndRound(false);
+    }, (2000))
   }
 
     return (
       <div className={styles.game}>
-        {!loading ? 
-          <div className={styles.quiz}>
-            <div className={styles.pokemonImage}>
-              <img className={styles.image} width={300} height={300} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
-            </div>
-            
-            {/* <Div ><h2>Number is: {current}</h2></Div>
-            <Div ><h2>Number is: {pokemon?.name}</h2></Div>
-            <Div >
-              <button onClick={() => newQuiz(pokemonsList)}>
-                Click Me Generate
-              </button>
-            </Div> */}
+        {!loading ?
+          <>
+            <Link href='/' className={styles.arrow}><Div><Image src={arrow} width={67} height={67} alt="Seta circular" /></Div></Link>
+            <div className={styles.quiz}>
+              <div className={styles.pokemonImage}>
+                <img className={filter ? styles.filter : styles.image} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
+              </div>
 
-            <Div button={false} >Who is that Pokémon ?</Div>
-            
-            
-            <div className={styles.answers}>{pokemons.map((item) => <Div button={true} key={item.name}><button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button></Div>)}</div>
-            
-          </div>
+              <Div>Who is that Pokémon ?</Div>
+              
+              
+              <div className={styles.answers}>
+                {pokemons.map((item) => 
+                  <Div 
+                  color={item.name == pokemon?.name && endRound ? '#8BC43F' : item.name != pokemon?.name && endRound && item.name == option?.name ? '#ED1C24' : ''}
+                  button={true}
+                  key={item.name}>
+                    <button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>
+                  </Div>
+                )}
+              </div>
+              
+            </div>
+            <div className={styles.current}><Div> Current <br /> {current}</Div></div>
+            <div className={styles.record}><Div> Record <br /> {record}</Div></div>
+          </>
           : <p>loading...</p>
         }
         

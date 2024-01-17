@@ -14,12 +14,20 @@
     width: 800px;
     height: 450px;
     border-radius: 20px;
+    z-index: 10;
 }
 
-.game .image {
+.game .filter {
     filter: grayscale(100%) brightness(0%) saturate(0%) contrast(100%);
     -webkit-filter: grayscale(100%) brightness(0%) saturate(0%) contrast(100%);
     -moz-filter: grayscale(100%) brightness(0%) saturate(0%) contrast(100%);
+    width: 300px;
+    height: 300px;
+}
+
+.game .image {
+    width: 300px;
+    height: 300px;
 }
 
 .game .quiz {
@@ -37,4 +45,94 @@
 
 .game .answers div {
     width: calc(50% - 10px);
+}
+
+.arrow {
+    position: absolute;
+    top: calc(50vh - 363px);
+    left: calc(50vw - 483px);
+    cursor: pointer;
+}
+
+.current {
+    position: absolute;
+    top: calc(50vh - 363px);
+    left: calc(50vw + 383px);
+    text-align: center;
+    width: 200px;
+}
+
+.record {
+    position: absolute;
+    top: calc(50vh - 203px);
+    left: calc(50vw + 383px);
+    text-align: center;
+    width: 200px;
+}
+
+@media (max-width: 800px) {
+    .game {
+        width: calc(100vw - 30px);
+        align-items: center;
+    }
+
+    .quiz {
+        display: flex;
+        align-items: center;
+    }
+
+    .game .pokemonImage {
+        width: calc(100vw - 30px);
+        height: calc(0.5625*(100vw - 30px));
+        background-size: cover;
+        padding: 50px;
+        border-radius: 15px;
+    }
+
+    .quiz{
+        width: calc(100vw - 30px);
+    }
+
+    .quiz div {
+        width: 100%;
+        text-align: center;
+    }
+
+    .game .filter {
+        width: 200px;
+        height: 200px;
+    }
+
+    .game .image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .game .pokemonImage {
+        padding: 35px;
+        border-radius: 5px;
+    }
+
+    .game .answers {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    .game .answers div {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .game .filter {
+        width: calc(35vw);
+        height: calc(35vw);
+    }
+
+    .game .image {
+        width: calc(35vw);
+        height: calc(35vw);
+    }
 }
