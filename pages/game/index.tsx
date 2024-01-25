@@ -6,6 +6,7 @@ import styles from './game.module.css';
 import Image from 'next/image';
 import arrow from '../../public/arrowforward.svg';
 import Link from 'next/link';
+import Loading from '../loading';
 
 export default function Game() {
   const [pokemon, setPokemon] = useState<Pokemon>();
@@ -115,7 +116,7 @@ export default function Game() {
             <div className={styles.current}><Div> Current <br /> {current}</Div></div>
             <div className={styles.record}><Div> Record <br /> {record}</Div></div>
           </>
-          : <p>loading...</p>
+          : <Loading></Loading>
         }
         
       </div>
