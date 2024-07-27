@@ -107,7 +107,7 @@ export default function Game() {
                   color={item.name == pokemon?.name && endRound ? '#8BC43F' : item.name != pokemon?.name && endRound && item.name == option?.name ? '#ED1C24' : ''}
                   button={true}
                   key={item.name}>
-                    <button onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>
+                    <button disabled={endRound} onClick={() => {chooseOption(item)}} key={item.name}>{item.name}</button>
                   </Div>
                 )}
               </div>
