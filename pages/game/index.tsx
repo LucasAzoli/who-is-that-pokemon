@@ -98,7 +98,7 @@ export default function Game() {
                 <Image priority={true} width={300} height={300} className={filter ? styles.filter : styles.image} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
               </div>
 
-              <Div>Who's That Pokémon?</Div>
+              <Div>Who&apos;s That Pokémon?</Div>
               
               
               <div className={styles.answers}>
