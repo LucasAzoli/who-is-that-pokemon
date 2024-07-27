@@ -8,11 +8,11 @@ import logo from '../public/logo.png';
 const Home: NextPage = () => {
   return (
     <div className={styles.menu}>
-      <Image src={logo} alt="logo"></Image>
+      <Image src={logo} alt="logo" priority={true}></Image>
       <div className={styles.options}>
-        <Link href='/game'><Div button={true}>Iniciar</Div></Link>
-        <Link href='/about'><Div button={true}>Sobre</Div></Link>
-        <Link href='/settings'><Div button={true}>Opções</Div></Link>
+        <Link href='/game'><Div button={true}>Start</Div></Link>
+        <Link href='/about'><Div button={true}>About</Div></Link>
+        <Link href='/settings'><Div button={true}>Options</Div></Link>
       </div>
     </ div>
   )

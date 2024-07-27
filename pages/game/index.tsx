@@ -95,7 +95,7 @@ export default function Game() {
             <Link href='/' className={styles.arrow}><Div><Image src={arrow} width={67} height={67} alt="Seta circular" /></Div></Link>
             <div className={styles.quiz}>
               <div className={styles.pokemonImage}>
-                <img className={filter ? styles.filter : styles.image} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
+                <Image priority={true} width={300} height={300} className={filter ? styles.filter : styles.image} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonNumber + 1}.svg`} alt="" />
               </div>
 
               <Div>Who's That Pokémon?</Div>

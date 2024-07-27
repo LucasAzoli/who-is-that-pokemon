@@ -6,7 +6,7 @@ import pokeball from '../public/pokeball.svg';
 export default function NotFound() {
     return (
     <div className={styles.menu}>
-        <Image className={styles.logo} src={logo} alt="logo"></Image>
+        <Image className={styles.logo} priority={true} src={logo} alt="logo"></Image>
         <div className={styles.error}>
             <div>
                 <h1>4</h1>
